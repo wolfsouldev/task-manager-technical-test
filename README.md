@@ -127,13 +127,14 @@ La API responde `201` al crear, `400` ante entradas inválidas, `404` si no exis
 
 ## Decisiones técnicas
 
-- **npm workspaces:** frontend y backend en un monorepo con un solo lockfile y comandos desde la raíz. Nx o Turborepo no eran necesarios para este alcance.
-- **NestJS:** separa controladores, DTOs validados y reglas de negocio. Los DTOs son clases porque sus decoradores validan en runtime.
-- **Drizzle con SQLite y PostgreSQL:** SQLite permite comenzar sin un servicio externo. PostgreSQL se selecciona configurando `DATABASE_URL`. Cada motor tiene esquema, migraciones y adaptador propios; la lógica de negocio depende de un contrato común.
+- **Monorepo con npm workspaces:** elegí mantener la web y la API en un mismo repositorio para que sea fácil revisar cómo se integran y ejecutar el proyecto. Hay una sola instalación y comandos desde la raíz; no hacía falta sumar Nx o Turborepo.
+- **React + Vite:** una SPA ligera que se desarrolla y levanta rápidamente para probar las pantallas y los flujos principales.
+- **NestJS:** separa controladores, DTOs validados y reglas de negocio, haciendo más sencillo seguir el recorrido de una solicitud. Los DTOs son clases porque sus decoradores validan en runtime.
+- **Drizzle con SQLite por defecto:** seleccioné SQLite para que quien revise la prueba no tenga que instalar ni configurar un servidor de base de datos; el archivo y las tablas se preparan al arrancar. PostgreSQL sigue disponible al cambiar `DATABASE_URL`, sin cambiar la lógica de negocio.
 - **TanStack Query:** gestiona caché y sincronización del estado remoto. El cambio de estado es optimista y se revierte si falla la API.
-- **React Hook Form + Zod:** validación de formularios en cliente, complementada por las validaciones del servidor.
+- **React Hook Form + Zod:** validan los formularios en cliente y ofrecen mensajes por campo, mientras el servidor vuelve a validar los datos.
 - **Organización por funcionalidad:** modelos, props y schemas se agrupan junto a tareas, usuarios y componentes; los contratos compartidos quedan aparte.
-- **Docker Compose + Nginx:** inicia frontend y API y conserva SQLite en un volumen.
+- **Docker Compose + Nginx:** ofrece otra forma reproducible de revisar la app y conserva la base SQLite en un volumen.
 
 ## ¿Qué haría con más tiempo?
 
