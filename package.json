@@ -1,0 +1,25 @@
+{
+  "name": "task-manager",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "apps/*"
+  ],
+  "engines": {
+    "node": ">=24.9.0"
+  },
+  "scripts": {
+    "dev": "npm run db:migrate && concurrently -k -n api,web \"npm run start:dev -w @task-manager/api\" \"npm run dev -w @task-manager/web\"",
+    "demo": "npm run db:migrate && npm run db:seed && npm run dev",
+    "db:migrate": "npm run db:migrate -w @task-manager/api",
+    "db:seed": "npm run db:seed -w @task-manager/api",
+    "test": "npm test --workspaces",
+    "build": "npm run build --workspaces",
+    "typecheck": "npm run typecheck --workspaces"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.0",
+    "typescript": "^5.9.3"
+  },
+  "packageManager": "npm@11.21.2"
+}
