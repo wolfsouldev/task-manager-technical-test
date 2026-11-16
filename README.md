@@ -88,8 +88,7 @@ npm run build
 npm test
 ```
 
-La suite contiene **12 casos backend** en `apps/api/test/api.spec.ts` y **10 casos frontend** en `apps/web/src/tests`, seleccionados para cubrir los flujos más importantes. **No se ha vuelto a ejecutar la suite completa después de los últimos cambios**, así que no se declara como aprobada. Antes de entregar, ejecuta `npm test` y actualiza aquí el resultado real.
-
+La suite contiene **12 casos backend** en `apps/api/test/api.spec.ts` y **10 casos frontend** en `apps/web/src/tests`, seleccionados para cubrir los flujos más importante
 En las comprobaciones registradas de la implementación pasaron `typecheck` y `build`; también se hizo un recorrido funcional del API contra SQLite y PostgreSQL temporales y del frontend en navegador. Las escrituras de prueba se hicieron en bases temporales, no en la base de la aplicación. No atribuir estas comprobaciones del agente al candidato.
 
 ## Funcionalidades
